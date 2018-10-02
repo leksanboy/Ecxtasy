@@ -1,1 +1,96 @@
-/* You can add global styles to this file, and also import other style files */
+  /*-------------*/
+ /* S·T·Y·L·E·S */
+/*-------------*/
+
+/*Font*/
+@font-face {
+	font-family: "bebas_neue";
+	src: url("assets/fonts/bebas_neue/BebasNeue-Regular.ttf") format("truetype");
+}
+
+/*Keyframes*/
+@keyframes glitch-anim-1 {
+	$steps: 10;
+
+	@for $i from 0 through $steps {
+		#{percentage($i*(1/$steps))} {
+			clip: rect(random(100)+px, 9999px, random(100)+px, 0);
+		}
+	}
+}
+@keyframes glitch-anim-2 {
+	$steps: 10;
+	
+	@for $i from 0 through $steps {
+		#{percentage($i*(1/$steps))} {
+			clip: rect(random(100)+px, 9999px, random(100)+px, 0);
+		}
+	}
+}
+
+/*Colors*/
+$backgroundColor: #f32f1f;
+$fontBlackColor: #212121;
+
+/*Body*/
+body{
+	background: $backgroundColor;
+	font-family: 'bebas_neue', sans-serif;
+
+	.content{
+		text-align: center;
+		padding: 30vh 0 0;
+		width: 100%;
+
+		.title{
+			color: $fontBlackColor;
+			font-weight: normal;
+			position: relative;
+			font-size: 89px;
+			padding: 0;
+			
+			&:before,
+			&:after{
+				content: attr(data-text);
+				position: absolute;
+				height: 100%;
+				width: 100%;
+				left: 0;
+				top: 0;
+			}
+
+			&::before{
+				animation: glitch-anim-1 2s infinite linear alternate-reverse;
+				clip: rect(44px, 450px, 56px, 0);
+				background: $backgroundColor;
+				text-shadow: -1px 0 red;
+				left: 2px;
+			}
+			&::after{
+				animation: glitch-anim-2 2s infinite linear alternate-reverse; 
+				clip: rect(44px, 450px, 56px, 0);
+				text-shadow: -1px solid blue;
+				background: $backgroundColor;
+				left: -2px;
+			}
+		}
+
+		.subtitle{
+			font-size: 34px;
+		}
+
+		.soon{
+			color: transparentize($fontBlackColor, .5);
+			padding: 64px 0 0;
+			font-weight: bold;
+			font-size: 21px;
+		}
+
+		.copyright{
+			color: transparentize($fontBlackColor, .75);
+			font-weight: bold;
+			font-size: 13px;
+			padding: 0;
+		}
+	}
+}
